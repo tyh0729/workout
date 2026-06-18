@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一週四練：上下半身分化菜單</title>
+    <title>健身新手：上下半身分化訓練菜單</title>
+    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -11,391 +12,415 @@
             font-family: 'Noto Sans TC', sans-serif;
             background-color: #f8fafc;
         }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.5rem;
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .tab-btn {
-            -webkit-tap-highlight-color: transparent;
+        /* 隱藏未選取的區塊 */
+        .hidden-section {
+            display: none;
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-16">
+<body class="text-slate-800 antialiased pb-12">
 
-    <header class="bg-indigo-700 text-white py-10 px-6 shadow-md mb-8">
+    <!-- Header 與導覽列 -->
+    <header class="bg-indigo-600 text-white pt-10 pb-6 px-6 shadow-md sticky top-0 z-50">
         <div class="max-w-5xl mx-auto">
-            <h1 class="text-3xl md:text-4xl font-black mb-3 tracking-wide text-center md:text-left">🔥 新手增肌：上下半身分化菜單</h1>
-            <p class="text-indigo-100 text-base md:text-lg leading-relaxed text-center md:text-left">
-                一週四練的最佳規劃：週一與週四專攻「上半身」，週二與週五強攻「下半身」。<br class="hidden md:block">
-                請選擇一個能在最後兩下感到吃力、但動作標準的重量。組間休息建議 60-90 秒。
-            </p>
+            <h1 class="text-2xl md:text-3xl font-black mb-4 tracking-wide text-center">🏋️ 健身新手分化菜單</h1>
+            
+            <!-- 切換按鈕區 -->
+            <div class="flex justify-center gap-3">
+                <button onclick="showSection('upper')" id="btn-upper" class="bg-white text-indigo-700 font-bold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-50 transition transform hover:scale-105">
+                    💪 上半身
+                </button>
+                <button onclick="showSection('lower')" id="btn-lower" class="bg-indigo-800 text-indigo-100 font-bold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-700 transition border border-indigo-500">
+                    🦵 下半身
+                </button>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 sm:px-6">
+    <!-- Main Content 區域 -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 mt-8">
         
-        <!-- Tab Controls -->
-        <div class="flex justify-center space-x-3 sm:space-x-4 mb-8 sticky top-4 z-10">
-            <button id="btn-upper" onclick="switchTab('upper')" class="tab-btn px-6 py-3 rounded-full font-bold transition duration-300 bg-indigo-600 text-white shadow-lg border border-transparent hover:scale-105">
-                💪 上半身 (週一/四)
-            </button>
-            <button id="btn-lower" onclick="switchTab('lower')" class="tab-btn px-6 py-3 rounded-full font-bold transition duration-300 bg-white text-slate-600 border border-slate-300 shadow-sm hover:bg-slate-50 hover:scale-105">
-                🦵 下半身 (週二/五)
-            </button>
-        </div>
+        <!-- ================= 上半身區塊 ================= -->
+        <div id="upper-section" class="space-y-6">
+            <div class="mb-4">
+                <h2 class="text-2xl font-bold border-b-2 border-indigo-200 pb-2 inline-block text-indigo-800">💪 上半身訓練 (胸、背、肩、手)</h2>
+                <p class="text-slate-500 text-sm mt-2">建議組數：每動作 3-4 組，每組 8-12 下。</p>
+            </div>
 
-        <!-- ================= UPPER BODY SECTION ================= -->
-        <div id="section-upper" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <!-- Upper Ex 1 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 1 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">1. 坐姿胸推機</h2>
+                        <h3 class="text-lg font-bold text-slate-800">1. 坐姿胸推機</h3>
                         <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">胸大肌/三頭</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=DJ19hH_Aqo4" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/DJ19hH_Aqo4/hqdefault.jpg" alt="坐姿胸推機教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <!-- 播放按鈕圖示覆蓋在圖片上 -->
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (4組 x 8-12下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">座椅高度：</strong> 把手對齊胸部中段（乳頭連線）。</li>
-                            <li><strong class="text-slate-700">肩胛骨固定：</strong> 挺胸、肩膀往後收下壓，**絕不聳肩**。</li>
-                            <li><strong class="text-slate-700">關節不鎖死：</strong> 往前推時吐氣，手肘推到底保持微彎。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <!-- 影片縮圖超連結 -->
+                    <a href="https://www.youtube.com/results?search_query=坐姿胸推機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/DJ19hH_Aqo4/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>肩胛骨固定：</strong> 挺胸，肩膀往後收、往下壓，絕對不要聳肩。</li>
+                        <li><strong>推與放：</strong> 往前推時吐氣，手肘推到頂端保持微彎不鎖死。</li>
+                    </ul>
+                </article>
 
-            <!-- Upper Ex 2 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 2 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">2. 坐姿滑輪下拉</h2>
+                        <h3 class="text-lg font-bold text-slate-800">2. 坐姿滑輪下拉</h3>
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">背闊肌/二頭</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=gckzvn7-ey4" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/gckzvn7-ey4/hqdefault.jpg" alt="坐姿滑輪下拉教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (4組 x 8-12下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">握距：</strong> 雙手握在比肩膀略寬之處（桿子彎曲處）。</li>
-                            <li><strong class="text-slate-700">發力方式：</strong> 挺胸收腹，想像用**「手肘」往下帶**，拉到鎖骨至上胸位置。</li>
-                            <li><strong class="text-slate-700">控制離心：</strong> 慢慢放回重量，保持背部張力。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <a href="https://www.youtube.com/results?search_query=坐姿滑輪下拉+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/gckzvn7-ey4/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>發力方式：</strong> 不要死命用手掌拉，想像用「手肘」往下帶動重量。</li>
+                        <li><strong>控制離心：</strong> 桿子放回去時控制速度，不要讓重量瞬間扯上去。</li>
+                    </ul>
+                </article>
 
-            <!-- Upper Ex 3 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 3 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">3. 坐姿划船機</h2>
+                        <h3 class="text-lg font-bold text-slate-800">3. 坐姿划船機</h3>
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">背部厚度</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=ciEXVQ76_zc" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/ciEXVQ76_zc/hqdefault.jpg" alt="坐姿划船機教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (3組 x 8-12下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">軀幹穩定：</strong> 雙腳踩穩，背部保持平直不拱背。</li>
-                            <li><strong class="text-slate-700">啟動順序：</strong> 先將「肩胛骨往後夾」，再順勢把把手拉向肚臍。</li>
-                            <li><strong class="text-slate-700">避免代償：</strong> 不要利用腰部過度後仰來甩動借力。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <a href="https://www.youtube.com/results?search_query=坐姿划船機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/ciEXVQ76_zc/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>啟動順序：</strong> 先將「肩胛骨往後夾」，接著順勢將把手拉向肚臍。</li>
+                        <li><strong>避免代償：</strong> 不要利用腰部過度後仰來甩動借力。</li>
+                    </ul>
+                </article>
 
-            <!-- Upper Ex 4 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 4 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">4. 坐姿肩推機</h2>
+                        <h3 class="text-lg font-bold text-slate-800">4. 坐姿肩推機</h3>
                         <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-1 rounded">三角肌(肩膀)</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=QlOEm34TkDs" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/QlOEm34TkDs/hqdefault.jpg" alt="坐姿肩推機教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (3組 x 8-12下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">手肘位置：</strong> 上推時手肘不要全開，稍微**朝前約45度角**，保護肩關節。</li>
-                            <li><strong class="text-slate-700">核心收緊：</strong> 腰部不要過度頂出懸空。</li>
-                            <li><strong class="text-slate-700">活動範圍：</strong> 下放至把手與下巴齊平即可再次上推。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <a href="https://www.youtube.com/results?search_query=坐姿肩推機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/QlOEm34TkDs/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>手肘位置：</strong> 上推時，手肘稍微朝前（不要完全與肩膀平行）。</li>
+                        <li><strong>活動範圍：</strong> 推至手肘微彎，下放至與下巴齊平的位置即可。</li>
+                    </ul>
+                </article>
 
-            <!-- Upper Ex 5 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 5 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">5. 啞鈴二頭彎舉</h2>
+                        <h3 class="text-lg font-bold text-slate-800">5. 啞鈴二頭彎舉</h3>
                         <span class="bg-rose-100 text-rose-800 text-xs font-semibold px-2 py-1 rounded">手臂前側</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=7Xbh_w-EhYA" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/7Xbh_w-EhYA/hqdefault.jpg" alt="啞鈴二頭彎舉教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (3組 x 10-15下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">大臂固定：</strong> 上臂緊貼身體兩側，舉起時**大臂絕對不能前後晃動**。</li>
-                            <li><strong class="text-slate-700">頂峰收縮：</strong> 最高點稍微停頓擠壓二頭肌。</li>
-                            <li><strong class="text-slate-700">緩慢下放：</strong> 花 2-3 秒慢慢放下，感受肌肉張力。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <a href="https://www.youtube.com/results?search_query=啞鈴二頭彎舉+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/7Xbh_w-EhYA/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>大臂固定：</strong> 上臂必須緊貼身體兩側，絕對不能前後晃動。</li>
+                        <li><strong>緩慢下放：</strong> 花約 2-3 秒慢慢放下啞鈴，感受肌肉張力。</li>
+                    </ul>
+                </article>
 
-            <!-- Upper Ex 6 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 6 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">6. 滑輪三頭下壓</h2>
+                        <h3 class="text-lg font-bold text-slate-800">6. 滑輪三頭下壓</h3>
                         <span class="bg-rose-100 text-rose-800 text-xs font-semibold px-2 py-1 rounded">手臂後側</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=3fT7vFnFtUw" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/3fT7vFnFtUw/hqdefault.jpg" alt="滑輪三頭下壓教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (3組 x 10-15下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">身體姿勢：</strong> 身體微向前傾，核心收緊站穩。</li>
-                            <li><strong class="text-slate-700">大臂固定：</strong> 上臂緊貼身體側邊並保持固定不動。</li>
-                            <li><strong class="text-slate-700">下壓到底：</strong> 往下壓到手臂幾乎伸直，回放時手肘大約呈 90 度即可。</li>
-                        </ul>
-                    </div>
+                    <a href="https://www.youtube.com/results?search_query=滑輪三頭下壓+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/3fT7vFnFtUw/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>身體姿勢：</strong> 身體微向前傾，大臂固定在體側不動。</li>
+                        <li><strong>下壓到底：</strong> 往下壓到手臂近乎伸直，回放時手肘呈 90 度。</li>
+                    </ul>
+                </article>
+
+                <!-- === 進階針對性加強區 === -->
+                <div class="col-span-1 md:col-span-2 mt-4 border-t-2 border-slate-200 pt-6">
+                    <h3 class="text-xl font-bold text-indigo-800 flex items-center gap-2 mb-2">
+                        <span>🎯 進階加強：上胸與上背 (靠近肩頸)</span>
+                    </h3>
+                    <p class="text-slate-600 text-sm">若想特別強化鎖骨下方（上胸），或透過強化背部來改善肩頸僵硬，可在上半身訓練日挑選 1-2 個動作加入。</p>
                 </div>
-            </article>
+
+                <!-- 動作 7: 上斜胸推 -->
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-bold text-slate-800">7. 上斜胸推機</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">上胸(靠近鎖骨)</span>
+                    </div>
+                    <a href="https://www.youtube.com/results?search_query=上斜胸推機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <!-- 使用通用胸推縮圖示意，點擊後一樣會去搜尋上斜胸推 -->
+                        <img src="https://img.youtube.com/vi/DJ19hH_Aqo4/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>椅背角度：</strong> 椅子傾斜約 30-45 度，推動軌跡為斜上方。</li>
+                        <li><strong>發力重點：</strong> 感受鎖骨下方的肌肉收縮，絕對不要聳肩。</li>
+                    </ul>
+                </article>
+
+                <!-- 動作 8: 蝴蝶機反向飛鳥 -->
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-bold text-slate-800">8. 反向飛鳥機</h3>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-1 rounded">後背/後三角</span>
+                    </div>
+                     <a href="https://www.youtube.com/results?search_query=蝴蝶機反向飛鳥+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <!-- 使用通用背部縮圖示意 -->
+                        <img src="https://img.youtube.com/vi/ciEXVQ76_zc/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>器材設定：</strong> 面對機器坐，胸口貼緊靠墊，雙手水平往後打開。</li>
+                        <li><strong>改善圓肩：</strong> 能有效喚醒背部小肌群，把前傾的肩膀往後拉。</li>
+                    </ul>
+                </article>
+                
+                <!-- 動作 9: 滑輪面拉 -->
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5 md:col-span-2">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-bold text-slate-800">9. 滑輪面拉 (Face Pull)</h3>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">上背(神級動作)</span>
+                    </div>
+                     <a href="https://www.youtube.com/results?search_query=滑輪面拉+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200 md:w-1/2 mx-auto">
+                        <!-- 使用通用滑輪縮圖示意 -->
+                        <img src="https://img.youtube.com/vi/gckzvn7-ey4/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 md:text-center md:list-none md:pl-0">
+                        <li><strong>高度設定：</strong> 滑輪設定在眼睛的高度，換上「雙頭繩索」。</li>
+                        <li><strong>動作軌跡：</strong> 將繩索往「臉部（額頭兩側）」拉，雙手呈現展示二頭肌的姿勢。</li>
+                        <li><strong>特別推薦：</strong> 這是最能強化上背並<strong>解救肩頸僵硬</strong>的黃金動作，切勿使用大重量！</li>
+                    </ul>
+                </article>
+
+            </div>
         </div>
 
-        <!-- ================= LOWER BODY SECTION ================= -->
-        <div id="section-lower" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+        <!-- ================= 下半身區塊 ================= -->
+        <div id="lower-section" class="hidden-section space-y-6">
+            <div class="mb-4">
+                <h2 class="text-2xl font-bold border-b-2 border-indigo-200 pb-2 inline-block text-indigo-800">🦵 下半身訓練 (腿、臀、背、核心)</h2>
+                <p class="text-slate-500 text-sm mt-2">建議組數：每動作 3-4 組，每組 8-15 下。組間休息可拉長。</p>
+            </div>
 
-            <!-- Lower Ex 1 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- 動作 1 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">1. 腿部推舉機</h2>
+                        <h3 class="text-lg font-bold text-slate-800">1. 腿部推舉機</h3>
                         <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-semibold px-2 py-1 rounded">大腿前側/臀部</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=Mrcx7fha1ww" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/Mrcx7fha1ww/hqdefault.jpg" alt="腿部推舉機教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (4組 x 8-12下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">腳掌位置：</strong> 雙腳踩在踏板中央，寬度約與肩同寬。</li>
-                            <li><strong class="text-slate-700">膝蓋方向：</strong> 下放時膝蓋朝腳尖方向，**絕對不能往內夾**。</li>
-                            <li><strong class="text-slate-700">關節不鎖死：</strong> 往上推到頂端時膝蓋保持微彎，保護關節。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <a href="https://www.youtube.com/results?search_query=腿部推舉機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/Mrcx7fha1ww/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                            <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>下放幅度：</strong> 下放時膝蓋盡量靠近胸口，但臀部不要離開椅墊。</li>
+                        <li><strong>推起注意：</strong> 推起時腳尖與膝蓋朝同方向，膝蓋微彎不鎖死。</li>
+                    </ul>
+                </article>
 
-            <!-- Lower Ex 2 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 2 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">2. 坐姿腿伸直</h2>
+                        <h3 class="text-lg font-bold text-slate-800">2. 坐姿腿伸直</h3>
                         <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-semibold px-2 py-1 rounded">大腿前側(股四頭)</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=mGvwI3l-HqE" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/mGvwI3l-HqE/hqdefault.jpg" alt="坐姿腿伸直教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (3組 x 10-15下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">器材設定：</strong> 背部貼緊椅背，膝關節對齊旋轉軸心，墊子卡在腳踝上方。</li>
-                            <li><strong class="text-slate-700">頂峰收縮：</strong> 往上踢直，在最高點停頓一秒感受強烈收縮。</li>
-                            <li><strong class="text-slate-700">離心控制：</strong> 放下的時候要慢，抵抗重量，不要讓機器「碰」出聲音。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <a href="https://www.youtube.com/results?search_query=坐姿腿伸直+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <!-- 改用穩定不會破圖的通用腿部器材圖 -->
+                        <img src="https://img.youtube.com/vi/Mrcx7fha1ww/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                            <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>頂峰收縮：</strong> 踢到頂點時稍微停頓一秒，感受大腿前側痠痛。</li>
+                        <li><strong>控制速度：</strong> 慢慢下放抵抗重量，不要讓機器瞬間掉落。</li>
+                    </ul>
+                </article>
 
-            <!-- Lower Ex 3 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 3 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">3. 機器腿彎舉</h2>
+                        <h3 class="text-lg font-bold text-slate-800">3. 機器腿彎舉</h3>
                         <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-semibold px-2 py-1 rounded">大腿後側(股二頭)</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=FwD7qE4FhZ0" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/FwD7qE4FhZ0/hqdefault.jpg" alt="機器腿彎舉教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (3組 x 10-15下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">固定身體：</strong> 確保大腿上方護墊壓緊，或俯臥時骨盆緊貼墊子不拱腰。</li>
-                            <li><strong class="text-slate-700">發力重點：</strong> 想像用「腳跟」往臀部方向勾到底，感受後側緊繃。</li>
-                            <li><strong class="text-slate-700">避免代償：</strong> 若重量太重會用腰部甩動，請適度減輕重量。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                    <a href="https://www.youtube.com/results?search_query=機器腿彎舉+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <!-- 改用穩定不會破圖的通用腿部器材圖 -->
+                        <img src="https://img.youtube.com/vi/Mrcx7fha1ww/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                            <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>孤立發力：</strong> 專注感受大腿後側發力，不要靠腰部甩動代償。</li>
+                        <li><strong>動作完整：</strong> 盡量將腳跟往臀部方向勾到底。</li>
+                    </ul>
+                </article>
 
-            <!-- Lower Ex 4 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                <!-- 動作 4 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">4. 站姿墊腳</h2>
+                        <h3 class="text-lg font-bold text-slate-800">4. 站姿墊腳</h3>
                         <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded">小腿肌群</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=gwLzBJYoWlI" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/gwLzBJYoWlI/hqdefault.jpg" alt="站姿墊腳教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (3組 x 15-20下)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">活動範圍：</strong> 找台階踩穩腳掌前半部，腳跟懸空。</li>
-                            <li><strong class="text-slate-700">完整拉伸：</strong> 將腳跟盡可能往下壓，讓小腿肌完全拉長。</li>
-                            <li><strong class="text-slate-700">全力頂起：</strong> 用小腿力量將身體墊高到最頂點，停頓一下再慢慢下放。</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                     <a href="https://www.youtube.com/results?search_query=站姿墊腳+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/gwLzBJYoWlI/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                            <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>活動範圍：</strong> 將腳跟下放到底感覺拉伸，然後盡全力往上墊高。</li>
+                        <li><strong>次數要求：</strong> 小腿耐力強，每組可以做到 15-20 下至微酸。</li>
+                    </ul>
+                </article>
 
-            <!-- Lower Ex 5 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                <div class="p-5">
+                 <!-- 動作 5 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h2 class="text-lg font-bold text-slate-800">5. 核心：棒式</h2>
+                        <h3 class="text-lg font-bold text-slate-800">5. 核心：棒式 (Plank)</h3>
                         <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-2 py-1 rounded">核心/腹橫肌</span>
                     </div>
-                    <div class="mb-4 shadow-sm bg-slate-200 rounded-lg overflow-hidden group">
-                        <a href="https://www.youtube.com/watch?v=GkAb5c7QWyQ" target="_blank" class="block relative">
-                            <img src="https://img.youtube.com/vi/GkAb5c7QWyQ/hqdefault.jpg" alt="棒式教學影片" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="bg-black/60 rounded-full p-3 group-hover:bg-red-600 transition duration-300">
-                                    <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="space-y-2 text-slate-600 text-sm">
-                        <p class="font-bold text-slate-700 border-b pb-1">🎯 動作重點 (3組 x 30-60秒)</p>
-                        <ul class="list-disc pl-4 space-y-1">
-                            <li><strong class="text-slate-700">身體姿勢：</strong> 手肘撐在肩膀正下方，頭背臀到腳跟保持一直線。</li>
-                            <li><strong class="text-slate-700">核心發力：</strong> 腹部往內收緊出力（像肚子要被打一拳時的感覺）。</li>
-                            <li><strong class="text-slate-700 text-red-600">避免塌腰：</strong> 若感覺腰痠代表臀部掉下去了，請稍微抬高屁股或先休息！</li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
+                     <a href="https://www.youtube.com/results?search_query=棒式+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <img src="https://img.youtube.com/vi/GkAb5c7QWyQ/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                            <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li>手肘與肩膀垂直，身體呈一直線，臀部不要過高或過低。</li>
+                        <li>肚子出力收緊，保持自然呼吸，每組撐 30-60 秒。</li>
+                    </ul>
+                </article>
 
+                <!-- === 下半身進階加強區 === -->
+                <div class="col-span-1 md:col-span-2 mt-4 border-t-2 border-slate-200 pt-6">
+                    <h3 class="text-xl font-bold text-indigo-800 flex items-center gap-2 mb-2">
+                        <span>🎯 進階加強：下背與臀部</span>
+                    </h3>
+                    <p class="text-slate-600 text-sm">若想加強下背核心（深蹲硬舉的基礎），或是想讓臀部更飽滿（改善假胯寬），可挑選以下器材。</p>
+                </div>
+
+                <!-- 動作 6: 羅馬椅 -->
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-bold text-slate-800">6. 羅馬椅挺身</h3>
+                        <span class="bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded">下背/豎脊肌</span>
+                    </div>
+                     <a href="https://www.youtube.com/results?search_query=羅馬椅+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <!-- 使用站姿縮圖示意 -->
+                        <img src="https://img.youtube.com/vi/gwLzBJYoWlI/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>靠墊位置：</strong> 調整高度，讓靠墊大約在骨盆下緣，讓上半身能自由下彎。</li>
+                        <li><strong>動作控制：</strong> 身體下彎後，用「下背和臀部」的力量把身體拉回水平，**不要過度往後仰**（避免折腰）。</li>
+                    </ul>
+                </article>
+
+                <!-- 動作 7: 臀部外展機 -->
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-bold text-slate-800">7. 坐姿臀部外展機</h3>
+                        <span class="bg-pink-100 text-pink-800 text-xs font-semibold px-2 py-1 rounded">臀中肌/側臀</span>
+                    </div>
+                     <a href="https://www.youtube.com/results?search_query=臀部外展機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <!-- 使用腿推縮圖示意 -->
+                        <img src="https://img.youtube.com/vi/Mrcx7fha1ww/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
+                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
+                        </div>
+                    </a>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>發力位置：</strong> 身體可以微前傾，用「大腿外側偏上（臀部兩側）」的力量將擋板向外推開。</li>
+                        <li><strong>收縮停頓：</strong> 打開到最大角度時停頓 1-2 秒，慢慢合起來，對改善臀部兩側凹陷很有效。</li>
+                    </ul>
+                </article>
+
+            </div>
         </div>
+
     </main>
 
+    <!-- Footer -->
+    <footer class="mt-12 text-center text-slate-400 text-xs pb-6">
+        <p>💡 每次訓練後別忘了針對練過的部位進行拉筋伸展喔！</p>
+    </footer>
+
+    <!-- 切換區塊的 JavaScript -->
     <script>
-        function switchTab(target) {
-            const btnUpper = document.getElementById('btn-upper');
-            const btnLower = document.getElementById('btn-lower');
-            const secUpper = document.getElementById('section-upper');
-            const secLower = document.getElementById('section-lower');
+        function showSection(sectionId) {
+            // 隱藏所有區塊
+            document.getElementById('upper-section').classList.add('hidden-section');
+            document.getElementById('lower-section').classList.add('hidden-section');
+            
+            // 重置按鈕樣式 (變成未選取狀態)
+            const upperBtn = document.getElementById('btn-upper');
+            const lowerBtn = document.getElementById('btn-lower');
+            
+            upperBtn.className = "bg-indigo-800 text-indigo-100 font-bold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-700 transition border border-indigo-500";
+            lowerBtn.className = "bg-indigo-800 text-indigo-100 font-bold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-700 transition border border-indigo-500";
 
-            // Define styles for active and inactive states
-            const activeClasses = "tab-btn px-6 py-3 rounded-full font-bold transition duration-300 bg-indigo-600 text-white shadow-lg border border-transparent hover:scale-105";
-            const inactiveClasses = "tab-btn px-6 py-3 rounded-full font-bold transition duration-300 bg-white text-slate-600 border border-slate-300 shadow-sm hover:bg-slate-50 hover:scale-105";
-
-            if (target === 'upper') {
-                secUpper.classList.remove('hidden');
-                secLower.classList.add('hidden');
-                
-                btnUpper.className = activeClasses;
-                btnLower.className = inactiveClasses;
-            } else {
-                secUpper.classList.add('hidden');
-                secLower.classList.remove('hidden');
-                
-                btnLower.className = activeClasses;
-                btnUpper.className = inactiveClasses;
+            // 顯示選擇的區塊並高亮按鈕
+            if (sectionId === 'upper') {
+                document.getElementById('upper-section').classList.remove('hidden-section');
+                upperBtn.className = "bg-white text-indigo-700 font-bold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-50 transition transform hover:scale-105";
+            } else if (sectionId === 'lower') {
+                document.getElementById('lower-section').classList.remove('hidden-section');
+                lowerBtn.className = "bg-white text-indigo-700 font-bold py-2 px-4 rounded-full shadow-sm hover:bg-indigo-50 transition transform hover:scale-105";
             }
         }
     </script>
