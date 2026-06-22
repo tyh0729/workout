@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>健身新手：上下半身分化訓練菜單 (雲端同步版)</title>
+    <title>健身新手：上下半身分化訓練菜單與紀錄</title>
     <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -16,46 +16,29 @@
         .hidden-section {
             display: none;
         }
-        /* 隱藏預設的滾動條，保持版面乾淨 */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
-            border-radius: 4px;
-        }
     </style>
 </head>
 <body class="text-slate-800 antialiased pb-12">
 
-    <!-- 標題區塊 -->
-    <header class="bg-indigo-600 text-white pt-5 pb-2 px-6 relative">
+    <!-- 標題區塊 (隨頁面滾動消失) -->
+    <header class="bg-indigo-600 text-white pt-5 pb-2 px-6">
         <h1 class="text-xl md:text-2xl font-black tracking-wide text-center">🏋️ 健身新手分化菜單</h1>
-        <div class="text-center mt-2 text-indigo-200 text-xs flex justify-center items-center gap-1">
-            <span id="auth-status-dot" class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
-            <span id="auth-status-text">雲端資料庫連線中...</span>
-        </div>
     </header>
 
-    <!-- 導覽列按鈕區 -->
-    <nav class="bg-indigo-600 sticky top-0 z-40 shadow-md py-3 border-t border-indigo-500/30">
-        <div class="max-w-5xl mx-auto flex justify-center gap-2 sm:gap-3 px-2">
+    <!-- 導覽列按鈕區 (固定在最上方) -->
+    <nav class="bg-indigo-600 sticky top-0 z-50 shadow-md py-3 border-t border-indigo-500/30">
+        <div class="max-w-5xl mx-auto flex justify-center gap-3">
             <button onclick="showSection('upper')" id="btn-upper" class="px-3 py-1 text-sm font-bold rounded-lg bg-white text-indigo-700 shadow-sm transition-all">
                 💪 上半身
             </button>
             <button onclick="showSection('lower')" id="btn-lower" class="px-3 py-1 text-sm font-bold rounded-lg text-indigo-100 hover:text-white hover:bg-indigo-600 border border-indigo-500/30 transition-all">
                 🦵 下半身
             </button>
-            <button onclick="showSection('records')" id="btn-records" class="px-3 py-1 text-sm font-bold rounded-lg text-indigo-100 hover:text-white hover:bg-indigo-600 border border-indigo-500/30 transition-all">
-                📊 紀錄
+            <button onclick="showSection('log')" id="btn-log" class="px-3 py-1 text-sm font-bold rounded-lg text-indigo-100 hover:text-white hover:bg-indigo-600 border border-indigo-500/30 transition-all">
+                📝 訓練紀錄
             </button>
         </div>
     </nav>
-
-    <!-- 提示訊息 Toast -->
-    <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50 text-sm whitespace-nowrap">
-        提示訊息
-    </div>
 
     <!-- Main Content 區域 -->
     <main class="max-w-5xl mx-auto px-4 sm:px-6 mt-6">
@@ -70,11 +53,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <!-- 動作 1 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">1. 坐姿胸推機</h3>
                         <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">胸大肌/三頭</span>
                     </div>
+                    <!-- 影片縮圖超連結 -->
                     <a href="https://www.youtube.com/results?search_query=坐姿胸推機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
                         <img src="https://img.youtube.com/vi/DJ19hH_Aqo4/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
@@ -82,14 +66,14 @@
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>肩胛骨固定：</strong> 挺胸，肩膀往後收、往下壓，絕對不要聳肩。</li>
                         <li><strong>推與放：</strong> 往前推時吐氣，手肘推到頂端保持微彎不鎖死。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 2 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">2. 坐姿滑輪下拉</h3>
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">背闊肌/二頭</span>
@@ -101,14 +85,14 @@
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>發力方式：</strong> 不要死命用手掌拉，想像用「手肘」往下帶動重量。</li>
                         <li><strong>控制離心：</strong> 桿子放回去時控制速度，不要讓重量瞬間扯上去。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 3 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">3. 坐姿划船機</h3>
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">背部厚度</span>
@@ -120,14 +104,14 @@
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>啟動順序：</strong> 先將「肩胛骨往後夾」，接著順勢將把手拉向肚臍。</li>
                         <li><strong>避免代償：</strong> 不要利用腰部過度後仰來甩動借力。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 4 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">4. 坐姿肩推機</h3>
                         <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-1 rounded">三角肌(肩膀)</span>
@@ -139,14 +123,14 @@
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>手肘位置：</strong> 上推時，手肘稍微朝前（不要完全與肩膀平行）。</li>
                         <li><strong>活動範圍：</strong> 推至手肘微彎，下放至與下巴齊平的位置即可。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 5 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">5. 啞鈴二頭彎舉</h3>
                         <span class="bg-rose-100 text-rose-800 text-xs font-semibold px-2 py-1 rounded">手臂前側</span>
@@ -158,14 +142,14 @@
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>大臂固定：</strong> 上臂必須緊貼身體兩側，絕對不能前後晃動。</li>
                         <li><strong>緩慢下放：</strong> 花約 2-3 秒慢慢放下啞鈴，感受肌肉張力。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 6 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">6. 滑輪三頭下壓</h3>
                         <span class="bg-rose-100 text-rose-800 text-xs font-semibold px-2 py-1 rounded">手臂後側</span>
@@ -177,7 +161,7 @@
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>身體姿勢：</strong> 身體微向前傾，大臂固定在體側不動。</li>
                         <li><strong>下壓到底：</strong> 往下壓到手臂近乎伸直，回放時手肘呈 90 度。</li>
                     </ul>
@@ -188,41 +172,44 @@
                     <h3 class="text-xl font-bold text-indigo-800 flex items-center gap-2 mb-2">
                         <span>🎯 進階加強：上胸與上背 (靠近肩頸)</span>
                     </h3>
+                    <p class="text-slate-600 text-sm">若想特別強化鎖骨下方（上胸），或透過強化背部來改善肩頸僵硬，可在上半身訓練日挑選 1-2 個動作加入。</p>
                 </div>
 
                 <!-- 動作 7: 上斜胸推 -->
-                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5 flex flex-col">
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">7. 上斜胸推機</h3>
                         <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">上胸(靠近鎖骨)</span>
                     </div>
                     <a href="https://www.youtube.com/results?search_query=上斜胸推機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <!-- 使用通用胸推縮圖示意，點擊後一樣會去搜尋上斜胸推 -->
                         <img src="https://img.youtube.com/vi/DJ19hH_Aqo4/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
                              <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>椅背角度：</strong> 椅子傾斜約 30-45 度，推動軌跡為斜上方。</li>
                         <li><strong>發力重點：</strong> 感受鎖骨下方的肌肉收縮，絕對不要聳肩。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 8: 蝴蝶機反向飛鳥 -->
-                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5 flex flex-col">
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">8. 反向飛鳥機</h3>
                         <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-1 rounded">後背/後三角</span>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=蝴蝶機反向飛鳥+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                     <a href="https://www.youtube.com/results?search_query=蝴蝶機反向飛鳥+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                        <!-- 使用通用背部縮圖示意 -->
                         <img src="https://img.youtube.com/vi/ciEXVQ76_zc/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
                              <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>器材設定：</strong> 面對機器坐，胸口貼緊靠墊，雙手水平往後打開。</li>
                         <li><strong>改善圓肩：</strong> 能有效喚醒背部小肌群，把前傾的肩膀往後拉。</li>
                     </ul>
@@ -234,16 +221,18 @@
                         <h3 class="text-lg font-bold text-slate-800">9. 滑輪面拉 (Face Pull)</h3>
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">上背(神級動作)</span>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=滑輪面拉+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200 md:w-1/2 mx-auto">
+                     <a href="https://www.youtube.com/results?search_query=滑輪面拉+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200 md:w-1/2 mx-auto">
+                        <!-- 使用通用滑輪縮圖示意 -->
                         <img src="https://img.youtube.com/vi/gckzvn7-ey4/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
                              <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 md:text-center md:list-none md:pl-0 mb-4">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 md:text-center md:list-none md:pl-0">
                         <li><strong>高度設定：</strong> 滑輪設定在眼睛的高度，換上「雙頭繩索」。</li>
                         <li><strong>動作軌跡：</strong> 將繩索往「臉部（額頭兩側）」拉，雙手呈現展示二頭肌的姿勢。</li>
+                        <li><strong>特別推薦：</strong> 這是最能強化上背並<strong>解救肩頸僵硬</strong>的黃金動作，切勿使用大重量！</li>
                     </ul>
                 </article>
 
@@ -260,7 +249,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <!-- 動作 1 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">1. 腿部推舉機</h3>
                         <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-semibold px-2 py-1 rounded">大腿前側/臀部</span>
@@ -272,17 +261,17 @@
                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>下放幅度：</strong> 下放時膝蓋盡量靠近胸口，但臀部不要離開椅墊。</li>
                         <li><strong>推起注意：</strong> 推起時腳尖與膝蓋朝同方向，膝蓋微彎不鎖死。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 2 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">2. 坐姿腿伸直</h3>
-                        <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-semibold px-2 py-1 rounded">大腿前側</span>
+                        <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-semibold px-2 py-1 rounded">大腿前側(股四頭)</span>
                     </div>
                     <a href="https://www.youtube.com/results?search_query=坐姿腿伸直+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
                         <img src="https://img.youtube.com/vi/Mrcx7fha1ww/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
@@ -291,17 +280,17 @@
                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>頂峰收縮：</strong> 踢到頂點時稍微停頓一秒，感受大腿前側痠痛。</li>
                         <li><strong>控制速度：</strong> 慢慢下放抵抗重量，不要讓機器瞬間掉落。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 3 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">3. 機器腿彎舉</h3>
-                        <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-semibold px-2 py-1 rounded">大腿後側</span>
+                        <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-semibold px-2 py-1 rounded">大腿後側(股二頭)</span>
                     </div>
                     <a href="https://www.youtube.com/results?search_query=機器腿彎舉+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
                         <img src="https://img.youtube.com/vi/Mrcx7fha1ww/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
@@ -310,45 +299,45 @@
                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>孤立發力：</strong> 專注感受大腿後側發力，不要靠腰部甩動代償。</li>
                         <li><strong>動作完整：</strong> 盡量將腳跟往臀部方向勾到底。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 4 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">4. 站姿墊腳</h3>
                         <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded">小腿肌群</span>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=站姿墊腳+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                     <a href="https://www.youtube.com/results?search_query=站姿墊腳+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
                         <img src="https://img.youtube.com/vi/gwLzBJYoWlI/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>活動範圍：</strong> 將腳跟下放到底感覺拉伸，然後盡全力往上墊高。</li>
                         <li><strong>次數要求：</strong> 小腿耐力強，每組可以做到 15-20 下至微酸。</li>
                     </ul>
                 </article>
 
                  <!-- 動作 5 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">5. 核心：棒式 (Plank)</h3>
                         <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-2 py-1 rounded">核心/腹橫肌</span>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=棒式+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                     <a href="https://www.youtube.com/results?search_query=棒式+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
                         <img src="https://img.youtube.com/vi/GkAb5c7QWyQ/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
                             <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                             <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li>手肘與肩膀垂直，身體呈一直線，臀部不要過高或過低。</li>
                         <li>肚子出力收緊，保持自然呼吸，每組撐 30-60 秒。</li>
                     </ul>
@@ -359,358 +348,361 @@
                     <h3 class="text-xl font-bold text-indigo-800 flex items-center gap-2 mb-2">
                         <span>🎯 進階加強：下背與臀部</span>
                     </h3>
+                    <p class="text-slate-600 text-sm">若想加強下背核心（深蹲硬舉的基礎），或是想讓臀部更飽滿（改善假胯寬），可挑選以下器材。</p>
                 </div>
 
                 <!-- 動作 6: 羅馬椅 -->
-                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5 flex flex-col">
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">6. 羅馬椅挺身</h3>
                         <span class="bg-orange-100 text-orange-800 text-xs font-semibold px-2 py-1 rounded">下背/豎脊肌</span>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=羅馬椅+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                     <a href="https://www.youtube.com/results?search_query=羅馬椅+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
                         <img src="https://img.youtube.com/vi/gwLzBJYoWlI/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
                              <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
                         <li><strong>靠墊位置：</strong> 調整高度，讓靠墊大約在骨盆下緣，讓上半身能自由下彎。</li>
-                        <li><strong>動作控制：</strong> 身體下彎後，用「下背和臀部」把身體拉回水平，不要過度後仰。</li>
+                        <li><strong>動作控制：</strong> 身體下彎後，用「下背和臀部」的力量把身體拉回水平，**不要過度往後仰**（避免折腰）。</li>
                     </ul>
                 </article>
 
                 <!-- 動作 7: 臀部外展機 -->
-                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5 flex flex-col">
+                <article class="bg-indigo-50 rounded-2xl shadow-sm border border-indigo-100 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-lg font-bold text-slate-800">7. 坐姿臀部外展機</h3>
                         <span class="bg-pink-100 text-pink-800 text-xs font-semibold px-2 py-1 rounded">臀中肌/側臀</span>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=臀部外展機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
+                     <a href="https://www.youtube.com/results?search_query=臀部外展機+教學" target="_blank" class="block relative mb-4 group rounded-lg overflow-hidden bg-slate-200">
                         <img src="https://img.youtube.com/vi/Mrcx7fha1ww/hqdefault.jpg" alt="教學影片搜尋" class="w-full h-auto object-cover group-hover:opacity-80 transition duration-300 filter grayscale">
                         <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/60 transition duration-300">
                              <svg class="w-8 h-8 text-white mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                              <span class="text-white text-sm font-bold tracking-wide">點擊搜尋教學</span>
                         </div>
                     </a>
-                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600 flex-grow">
-                        <li><strong>發力位置：</strong> 身體微前傾，用「大腿外側偏上」的力量將擋板推開。</li>
-                        <li><strong>收縮停頓：</strong> 打開到最大角度時停頓 1-2 秒，慢慢合起來。</li>
+                    <ul class="list-disc pl-4 space-y-1 text-sm text-slate-600">
+                        <li><strong>發力位置：</strong> 身體可以微前傾，用「大腿外側偏上（臀部兩側）」的力量將擋板向外推開。</li>
+                        <li><strong>收縮停頓：</strong> 打開到最大角度時停頓 1-2 秒，慢慢合起來，對改善臀部兩側凹陷很有效。</li>
                     </ul>
                 </article>
 
             </div>
         </div>
 
-        <!-- ================= 總覽與新增區塊 ================= -->
-        <div id="records-section" class="hidden-section space-y-6">
+        <!-- ================= 訓練紀錄區塊 ================= -->
+        <div id="log-section" class="hidden-section space-y-6">
             <div class="mb-4">
-                <h2 class="text-2xl font-bold border-b-2 border-indigo-200 pb-2 inline-block text-indigo-800">📊 紀錄</h2>
-                <p class="text-slate-500 text-sm mt-2">可檢視所有運動歷史，或新增訓練項目。</p>
+                <h2 class="text-2xl font-bold border-b-2 border-indigo-200 pb-2 inline-block text-indigo-800">📝 訓練紀錄</h2>
+                <p class="text-slate-500 text-sm mt-2">記錄你每次使用的器材、重量與次數，追蹤進步軌跡！此紀錄會自動保存在你的設備中。</p>
             </div>
 
-            <!-- 自訂新增表單 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <span>➕ 新增紀錄</span>
-                </h3>
-                <div class="flex flex-wrap items-end gap-3">
-                    <div class="flex-grow min-w-[140px]">
-                        <label class="block text-xs font-bold text-slate-500 mb-1">動作名稱</label>
-                        <select id="custom-exercise-name" class="w-full px-3 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:border-indigo-500 bg-slate-50 focus:bg-white transition-colors">
-                            <optgroup label="上半身">
-                                <option value="chest-press">坐姿胸推機</option>
-                                <option value="lat-pulldown">坐姿滑輪下拉</option>
-                                <option value="seated-row">坐姿划船機</option>
-                                <option value="shoulder-press">坐姿肩推機</option>
-                                <option value="bicep-curl">啞鈴二頭彎舉</option>
-                                <option value="tricep-pushdown">滑輪三頭下壓</option>
-                                <option value="incline-press">上斜胸推機</option>
-                                <option value="reverse-fly">反向飛鳥機</option>
-                                <option value="face-pull">滑輪面拉</option>
-                            </optgroup>
-                            <optgroup label="下半身">
-                                <option value="leg-press">腿部推舉機</option>
-                                <option value="leg-extension">坐姿腿伸直</option>
-                                <option value="leg-curl">機器腿彎舉</option>
-                                <option value="calf-raise">站姿墊腳</option>
-                                <option value="plank">棒式</option>
-                                <option value="roman-chair">羅馬椅挺身</option>
-                                <option value="hip-abduction">坐姿臀部外展機</option>
-                            </optgroup>
-                        </select>
+            <!-- 輸入表單 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 md:p-6">
+                <form id="record-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+                        <div class="lg:col-span-1">
+                            <label class="block text-sm font-bold text-slate-700 mb-1">📅 日期</label>
+                            <input type="date" id="record-date" required class="w-full rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                        </div>
+                        <div class="lg:col-span-2">
+                            <label class="block text-sm font-bold text-slate-700 mb-1">🏋️ 器材名稱 / 訓練部位</label>
+                            <select id="record-equipment" required class="w-full rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-white text-slate-700">
+                                <option value="" disabled selected>請選擇器材...</option>
+                                <optgroup label="💪 上半身">
+                                    <option value="坐姿胸推機">1. 坐姿胸推機 (胸/三頭)</option>
+                                    <option value="坐姿滑輪下拉">2. 坐姿滑輪下拉 (背/二頭)</option>
+                                    <option value="坐姿划船機">3. 坐姿划船機 (背)</option>
+                                    <option value="坐姿肩推機">4. 坐姿肩推機 (肩)</option>
+                                    <option value="啞鈴二頭彎舉">5. 啞鈴二頭彎舉 (手臂前側)</option>
+                                    <option value="滑輪三頭下壓">6. 滑輪三頭下壓 (手臂後側)</option>
+                                    <option value="上斜胸推機">7. 上斜胸推機 (上胸)</option>
+                                    <option value="反向飛鳥機">8. 蝴蝶機反向飛鳥 (後背)</option>
+                                    <option value="滑輪面拉">9. 滑輪面拉 (上背)</option>
+                                </optgroup>
+                                <optgroup label="🦵 下半身">
+                                    <option value="腿部推舉機">1. 腿部推舉機 (腿/臀)</option>
+                                    <option value="坐姿腿伸直">2. 坐姿腿伸直 (大腿前側)</option>
+                                    <option value="機器腿彎舉">3. 機器腿彎舉 (大腿後側)</option>
+                                    <option value="站姿墊腳">4. 站姿墊腳 (小腿)</option>
+                                    <option value="棒式 (Plank)">5. 棒式 (核心)</option>
+                                    <option value="羅馬椅挺身">6. 羅馬椅挺身 (下背)</option>
+                                    <option value="坐姿臀部外展機">7. 坐姿臀部外展機 (側臀)</option>
+                                </optgroup>
+                                <optgroup label="自訂/其他">
+                                    <option value="有氧運動 (跑步機/腳踏車)">有氧運動 (跑步機/腳踏車)</option>
+                                    <option value="其他自訂器材">其他自訂器材</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="lg:col-span-1">
+                            <label class="block text-sm font-bold text-slate-700 mb-1">⚖️ 重量</label>
+                            <input type="text" id="record-weight" placeholder="例如：20 kg 或 4片" required class="w-full rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                        </div>
+                        <div class="lg:col-span-1">
+                            <label class="block text-sm font-bold text-slate-700 mb-1">🔄 組數</label>
+                            <input type="number" id="record-sets" placeholder="例如：4" min="1" required class="w-full rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                        </div>
+                        <div class="lg:col-span-1">
+                            <label class="block text-sm font-bold text-slate-700 mb-1">🔢 次數</label>
+                            <input type="number" id="record-reps-count" placeholder="例如：12" min="1" required class="w-full rounded-lg border-slate-300 border p-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                        </div>
                     </div>
-                    <div class="w-24">
-                        <label class="block text-xs font-bold text-slate-500 mb-1">重量(kg)</label>
-                        <input type="number" id="custom-weight" placeholder="0" class="w-full px-3 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:border-indigo-500 bg-slate-50 focus:bg-white transition-colors">
+                    <div class="pt-2">
+                        <button type="button" onclick="addRecord()" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 shadow-sm transition-all flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            新增這筆紀錄
+                        </button>
                     </div>
-                    <div class="w-20">
-                        <label class="block text-xs font-bold text-slate-500 mb-1">組數</label>
-                        <input type="number" id="custom-sets" placeholder="1" value="1" min="1" class="w-full px-3 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:border-indigo-500 bg-slate-50 focus:bg-white transition-colors">
-                    </div>
-                    <div class="w-24">
-                        <label class="block text-xs font-bold text-slate-500 mb-1">次數/時間</label>
-                        <input type="number" id="custom-reps" placeholder="0" class="w-full px-3 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:border-indigo-500 bg-slate-50 focus:bg-white transition-colors">
-                    </div>
-                    <div class="w-20">
-                        <label class="block text-xs font-bold text-slate-500 mb-1">單位</label>
-                        <select id="custom-unit" class="w-full px-2 py-2 text-sm border border-slate-300 rounded focus:outline-none focus:border-indigo-500 bg-slate-50 focus:bg-white transition-colors">
-                            <option value="下">下</option>
-                            <option value="秒">秒</option>
-                            <option value="分">分</option>
-                            <option value="公里">公里</option>
-                        </select>
-                    </div>
-                    <button onclick="window.saveCustomRecord()" class="w-full sm:w-auto px-6 py-2 bg-indigo-600 text-white text-sm font-bold rounded shadow hover:bg-indigo-700 transition">
-                        儲存
-                    </button>
-                </div>
+                </form>
             </div>
 
-            <!-- 所有紀錄清單 -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <span>📜 雲端歷史總覽</span>
-                </h3>
-                <div id="master-records-list" class="space-y-2 max-h-[500px] overflow-y-auto custom-scrollbar pr-2">
-                    <div class="text-slate-400 text-center py-4">載入中...</div>
+            <!-- 檔案同步工具列 -->
+            <div class="flex flex-wrap gap-3 mb-4 justify-end">
+                <button onclick="triggerImport()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-lg shadow-sm border border-slate-300 transition-all text-sm flex items-center gap-2">
+                    📂 手動讀取本地檔案
+                </button>
+                <!-- 隱藏的檔案輸入框 -->
+                <input type="file" id="import-file" accept=".json" class="hidden" onchange="importRecords(event)">
+                
+                <button onclick="exportRecords()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-all text-sm flex items-center gap-2">
+                    💾 儲存並下載 (records.json)
+                </button>
+            </div>
+
+            <!-- 紀錄列表 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-left text-sm whitespace-nowrap">
+                        <thead class="uppercase tracking-wider border-b border-slate-200 bg-slate-50 text-slate-600">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 font-bold">日期</th>
+                                <th scope="col" class="px-6 py-4 font-bold">器材名稱</th>
+                                <th scope="col" class="px-6 py-4 font-bold">重量</th>
+                                <th scope="col" class="px-6 py-4 font-bold">組數</th>
+                                <th scope="col" class="px-6 py-4 font-bold">次數</th>
+                                <th scope="col" class="px-6 py-4 font-bold text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="record-list" class="divide-y divide-slate-100 text-slate-800">
+                            <!-- 紀錄會透過 JS 動態加在這裡 -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <footer class="mt-12 text-center text-slate-400 text-xs pb-6">
+    <!-- Footer -->
+    <footer class="mt-12 text-center text-slate-400 text-sm pb-8">
         <p>💡 每次訓練後別忘了針對練過的部位進行拉筋伸展喔！</p>
     </footer>
 
-    <!-- 頁面 UI 切換邏輯 -->
+    <!-- 互動與紀錄功能的 JavaScript -->
     <script>
+        // --- 區塊切換邏輯 ---
         function showSection(sectionId) {
+            // 隱藏所有區塊
             document.getElementById('upper-section').classList.add('hidden-section');
             document.getElementById('lower-section').classList.add('hidden-section');
-            document.getElementById('records-section').classList.add('hidden-section');
+            document.getElementById('log-section').classList.add('hidden-section');
             
+            // 取得按鈕元素
+            const upperBtn = document.getElementById('btn-upper');
+            const lowerBtn = document.getElementById('btn-lower');
+            const logBtn = document.getElementById('btn-log');
+            
+            // 定義樣式
             const unselectedClass = "px-3 py-1 text-sm font-bold rounded-lg text-indigo-100 hover:text-white hover:bg-indigo-600 border border-indigo-500/30 transition-all";
             const selectedClass = "px-3 py-1 text-sm font-bold rounded-lg bg-white text-indigo-700 shadow-sm transition-all";
 
-            document.getElementById('btn-upper').className = unselectedClass;
-            document.getElementById('btn-lower').className = unselectedClass;
-            document.getElementById('btn-records').className = unselectedClass;
+            // 先全部重置為未選取狀態
+            upperBtn.className = unselectedClass;
+            lowerBtn.className = unselectedClass;
+            logBtn.className = unselectedClass;
 
+            // 顯示選擇的區塊並高亮對應的按鈕
             if (sectionId === 'upper') {
                 document.getElementById('upper-section').classList.remove('hidden-section');
-                document.getElementById('btn-upper').className = selectedClass;
+                upperBtn.className = selectedClass;
             } else if (sectionId === 'lower') {
                 document.getElementById('lower-section').classList.remove('hidden-section');
-                document.getElementById('btn-lower').className = selectedClass;
-            } else if (sectionId === 'records') {
-                document.getElementById('records-section').classList.remove('hidden-section');
-                document.getElementById('btn-records').className = selectedClass;
+                lowerBtn.className = selectedClass;
+            } else if (sectionId === 'log') {
+                document.getElementById('log-section').classList.remove('hidden-section');
+                logBtn.className = selectedClass;
             }
         }
 
-        // 提示訊息
-        window.showToast = function(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.classList.remove('opacity-0');
-            setTimeout(() => {
-                toast.classList.add('opacity-0');
-            }, 3000);
+        // --- 訓練紀錄儲存邏輯 (LocalStorage) ---
+        // 從瀏覽器本地儲存讀取舊資料，若無則為空陣列
+        let workoutRecords = JSON.parse(localStorage.getItem('myWorkoutRecords')) || [];
+
+        // 將紀錄渲染到表格中
+        function renderRecords() {
+            const list = document.getElementById('record-list');
+            list.innerHTML = '';
+            
+            if(workoutRecords.length === 0) {
+                list.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-slate-400">目前還沒有紀錄，開始你的第一次訓練吧！</td></tr>`;
+                return;
+            }
+
+            // 反轉陣列，讓最新新增的在最上面顯示
+            const reversedRecords = [...workoutRecords].reverse();
+
+            reversedRecords.forEach((record, reversedIndex) => {
+                // 計算在原始陣列中的真實 index，以便正確刪除
+                const originalIndex = workoutRecords.length - 1 - reversedIndex;
+                
+                // 向下相容處理：支援舊版只有 reps 的寫法，或是新版 sets + repsCount 的寫法
+                const displaySets = record.sets ? record.sets : '-';
+                const displayReps = record.repsCount ? record.repsCount : (record.reps || '-');
+                
+                list.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 text-slate-500">${record.date}</td>
+                        <td class="px-6 py-4 font-bold text-indigo-700">${record.equipment}</td>
+                        <td class="px-6 py-4 font-medium text-slate-700">${record.weight}</td>
+                        <td class="px-6 py-4 text-slate-600">${displaySets}</td>
+                        <td class="px-6 py-4 text-slate-600">${displayReps}</td>
+                        <td class="px-6 py-4 text-center">
+                            <button onclick="deleteRecord(${originalIndex})" class="text-red-500 hover:text-red-700 font-bold text-xs bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-md transition-colors">
+                                刪除
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
         }
-    </script>
 
-    <!-- Firebase 雲端資料庫邏輯 (跨裝置同步核心) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // 新增紀錄的函數
+        function addRecord() {
+            const dateInput = document.getElementById('record-date');
+            const equipmentInput = document.getElementById('record-equipment');
+            const weightInput = document.getElementById('record-weight');
+            const setsInput = document.getElementById('record-sets');
+            const repsInput = document.getElementById('record-reps-count');
 
-	  // Your web app's Firebase configuration
-	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-	  const firebaseConfig = {
-		apiKey: "AIzaSyAHH7sh6VrAPnUvOPrCzPrb3flBNeOAcs8",
-		authDomain: "workout-92352.firebaseapp.com",
-		projectId: "workout-92352",
-		storageBucket: "workout-92352.firebasestorage.app",
-		messagingSenderId: "745011602757",
-		appId: "1:745011602757:web:649a6d86157465c9198a2c",
-		measurementId: "G-82P3JHK3ZK"
-	  };
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'fitness-app-id';
+            const date = dateInput.value;
+            const equipment = equipmentInput.value; // select 標籤取 value，不需要 trim
+            const weight = weightInput.value.trim();
+            const sets = setsInput.value.trim();
+            const repsCount = repsInput.value.trim();
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+            if(!date || !equipment || !weight || !sets || !repsCount) {
+                // 如果使用原生的 alert，為求體驗也可考慮改用更美觀的 UI，這邊保持簡單實用
+                alert("請將「日期、器材、重量、組數、次數」所有欄位填寫完整哦！");
+                return;
+            }
 
-        let currentUser = null;
-        let unsubscribeLogs = null;
+            // 將新紀錄推入陣列 (加入 sets 和 repsCount 欄位)
+            workoutRecords.push({ date, equipment, weight, sets, repsCount });
+            
+            // 存入 LocalStorage
+            localStorage.setItem('myWorkoutRecords', JSON.stringify(workoutRecords));
+            
+            // 重新渲染表格
+            renderRecords();
 
-        // 建立動作 ID 對應中文名稱的字典
-        const exerciseDict = {
-            'chest-press': '坐姿胸推機',
-            'lat-pulldown': '坐姿滑輪下拉',
-            'seated-row': '坐姿划船機',
-            'shoulder-press': '坐姿肩推機',
-            'bicep-curl': '啞鈴二頭彎舉',
-            'tricep-pushdown': '滑輪三頭下壓',
-            'incline-press': '上斜胸推機',
-            'reverse-fly': '反向飛鳥機',
-            'face-pull': '滑輪面拉',
-            'leg-press': '腿部推舉機',
-            'leg-extension': '坐姿腿伸直',
-            'leg-curl': '機器腿彎舉',
-            'calf-raise': '站姿墊腳',
-            'plank': '棒式',
-            'roman-chair': '羅馬椅挺身',
-            'hip-abduction': '坐姿臀部外展機'
-        };
+            // 清空輸入框（保留日期不動，將其他欄位清空方便輸入下一組）
+            equipmentInput.value = '';
+            weightInput.value = '';
+            setsInput.value = '';
+            repsInput.value = '';
+            equipmentInput.focus(); // 讓游標回到器材輸入框
+        }
 
-        function updateAuthUI(user) {
-            const dot = document.getElementById('auth-status-dot');
-            const text = document.getElementById('auth-status-text');
-            if (user) {
-                dot.classList.remove('bg-yellow-400', 'animate-pulse');
-                dot.classList.add('bg-emerald-400');
-                text.textContent = '雲端已連線同步';
-            } else {
-                dot.classList.remove('bg-emerald-400');
-                dot.classList.add('bg-yellow-400', 'animate-pulse');
-                text.textContent = '雲端連線中...';
+        // 刪除紀錄的函數
+        function deleteRecord(index) {
+            if(confirm("確定要刪除這筆訓練紀錄嗎？")) {
+                workoutRecords.splice(index, 1); // 從陣列中移除
+                localStorage.setItem('myWorkoutRecords', JSON.stringify(workoutRecords)); // 更新 LocalStorage
+                renderRecords(); // 重新整理畫面
             }
         }
 
-        const initAuth = async () => {
+        // --- 匯出與匯入 JSON 檔案邏輯 ---
+        function exportRecords() {
+            if (workoutRecords.length === 0) {
+                alert("目前沒有紀錄可以匯出喔！");
+                return;
+            }
+            // 將資料轉成 JSON 字串格式 (排版縮排 2 格)
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(workoutRecords, null, 2));
+            // 建立一個隱藏的下載連結來觸發下載
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "records.json");
+            document.body.appendChild(downloadAnchorNode); // Firefox 必須
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        function triggerImport() {
+            document.getElementById('import-file').click();
+        }
+
+        function importRecords(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (Array.isArray(importedData)) {
+                        if(confirm("即將匯入檔案，這會覆蓋目前的本地紀錄，確定嗎？")) {
+                            workoutRecords = importedData;
+                            localStorage.setItem('myWorkoutRecords', JSON.stringify(workoutRecords));
+                            renderRecords();
+                            alert("✅ 紀錄匯入成功！");
+                        }
+                    } else {
+                        alert("❌ 檔案格式錯誤，這不是有效的訓練紀錄檔。");
+                    }
+                } catch (err) {
+                    alert("❌ 解析檔案失敗！請確認檔案是 JSON 格式。");
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = ''; // 清空 input 讓下次可以選同一個檔案
+        }
+
+        // 自動從 GitHub 同目錄嘗試讀取 records.json
+        async function fetchRecordsFromGithub() {
             try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
+                // 加入 cache: "no-store" 避免讀到舊的暫存檔
+                const response = await fetch('./records.json', { cache: "no-store" });
+                if (response.ok) {
+                    const serverRecords = await response.json();
+                    // 如果讀取到遠端有檔案，且本地端目前完全沒資料，就自動載入
+                    if (workoutRecords.length === 0 && serverRecords.length > 0) {
+                        workoutRecords = serverRecords;
+                        localStorage.setItem('myWorkoutRecords', JSON.stringify(workoutRecords));
+                        renderRecords();
+                        console.log("已自動從目錄下的 records.json 載入紀錄！");
+                    }
                 }
             } catch (error) {
-                console.error("登入失敗", error);
-                window.showToast("資料庫連線失敗，請稍後重試");
+                console.log("找不到 records.json 或目前在本地磁碟執行，繼續使用本地快取。");
             }
-        };
+        }
 
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-            updateAuthUI(user);
-            if (user) {
-                setupRealtimeListener(user.uid);
-            }
+        // 網頁載入完成後的初始化設定
+        document.addEventListener("DOMContentLoaded", () => {
+            // 自動將日期預設為今天
+            document.getElementById('record-date').valueAsDate = new Date();
+            // 先嘗試從伺服器/GitHub 同目錄拉取 records.json
+            fetchRecordsFromGithub();
+            // 渲染既有的紀錄
+            renderRecords();
+            // 確保一開始顯示上半身區塊，並將按鈕設為對應狀態
+            showSection('upper');
         });
-
-        initAuth();
-
-        function setupRealtimeListener(userId) {
-            if (unsubscribeLogs) unsubscribeLogs();
-
-            const logsRef = collection(db, 'artifacts', appId, 'users', userId, 'workout_logs');
-
-            unsubscribeLogs = onSnapshot(logsRef, (snapshot) => {
-                const logs = [];
-                snapshot.forEach(doc => {
-                    logs.push({ id: doc.id, ...doc.data() });
-                });
-
-                // 在記憶體中進行時間排序 (越新的越上面)
-                logs.sort((a, b) => b.timestamp - a.timestamp);
-
-                // 更新總覽清單
-                renderMasterList(logs);
-
-            }, (error) => {
-                console.error("Firestore 讀取錯誤:", error);
-            });
-        }
-
-        // 渲染「總覽」的完整歷史清單
-        function renderMasterList(logs) {
-            const masterList = document.getElementById('master-records-list');
-            if (!masterList) return;
-            
-            masterList.innerHTML = '';
-            if (logs.length === 0) {
-                masterList.innerHTML = '<div class="text-slate-400 text-center py-4">目前尚無任何紀錄，開始訓練吧！</div>';
-                return;
-            }
-
-            logs.forEach(record => {
-                const div = document.createElement('div');
-                div.className = "flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-200/60 gap-2";
-                
-                // 決定顯示名稱：優先讀取自訂名稱，若無則查詢字典
-                let displayName = record.exerciseName || exerciseDict[record.exerciseId] || record.exerciseId;
-                let unit = record.unit || '下';
-                let weightStr = record.weight > 0 ? `${record.weight}kg × ` : '';
-                let setsStr = record.sets ? `${record.sets}組 × ` : ''; // 如果有組數就顯示
-
-                div.innerHTML = `
-                    <div class="flex-shrink-0">
-                        <div class="text-sm font-bold text-slate-800">${displayName}</div>
-                        <div class="text-xs text-slate-500 mt-0.5">${record.dateStr}</div>
-                    </div>
-                    <div class="text-indigo-700 font-mono font-bold bg-indigo-100/50 px-2 py-1 rounded text-right text-xs sm:text-sm">
-                        ${weightStr}${setsStr}${record.reps} ${unit}
-                    </div>
-                `;
-                masterList.appendChild(div);
-            });
-        }
-
-        // 自訂紀錄表單儲存
-        window.saveCustomRecord = async function() {
-            if (!currentUser) {
-                window.showToast("資料庫尚未連線，無法儲存");
-                return;
-            }
-
-            const exerciseIdInput = document.getElementById('custom-exercise-name').value;
-            const nameInput = exerciseDict[exerciseIdInput];
-            const weightInput = parseFloat(document.getElementById('custom-weight').value) || 0;
-            const setsInput = parseInt(document.getElementById('custom-sets').value, 10) || 1;
-            const repsInput = parseInt(document.getElementById('custom-reps').value, 10);
-            const unitInput = document.getElementById('custom-unit').value;
-
-            if (!nameInput) {
-                window.showToast("請選擇動作名稱！");
-                return;
-            }
-            if (isNaN(repsInput)) {
-                window.showToast("請輸入次數或時間！");
-                return;
-            }
-
-            const now = new Date();
-            const dateStr = `${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-            
-            const recordData = {
-                exerciseId: exerciseIdInput,
-                exerciseName: nameInput,
-                weight: weightInput,
-                sets: setsInput,
-                reps: repsInput,
-                unit: unitInput,
-                timestamp: now.getTime(),
-                dateStr: dateStr
-            };
-
-            try {
-                const logsRef = collection(db, 'artifacts', appId, 'users', currentUser.uid, 'workout_logs');
-                await addDoc(logsRef, recordData);
-                
-                // 保留下拉選單目前選擇的項目，方便連續輸入
-                document.getElementById('custom-weight').value = '';
-                document.getElementById('custom-sets').value = '1'; // 恢復預設 1 組
-                document.getElementById('custom-reps').value = '';
-                window.showToast("✅ 紀錄已新增並同步！");
-            } catch (error) {
-                console.error("寫入錯誤", error);
-                window.showToast("儲存失敗，請重試");
-            }
-        };
     </script>
 </body>
 </html>
