@@ -459,6 +459,23 @@
                 </form>
             </div>
 
+            <!-- GitHub 同步設定區 -->
+            <div class="bg-slate-50 rounded-2xl shadow-sm border border-slate-200 p-5 mb-4">
+                <div class="flex justify-between items-center cursor-pointer" onclick="toggleGithubSettings()">
+                    <h3 class="font-bold text-slate-700 flex items-center gap-2">⚙️ GitHub 自動同步設定 (首次使用需設定)</h3>
+                    <span id="gh-toggle-icon" class="text-slate-500 font-bold">▼</span>
+                </div>
+                <div id="gh-settings" class="hidden mt-4 space-y-3">
+                    <p class="text-xs text-slate-500">請輸入您的 GitHub 資訊，設定後即可直接將紀錄上傳至 GitHub。基於安全，這些資訊只會存在您的瀏覽器中。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <input type="text" id="gh-owner" placeholder="GitHub 帳號名稱 (例如: john-doe)" class="w-full text-sm rounded border-slate-300 border p-2 focus:ring-indigo-500 outline-none">
+                        <input type="text" id="gh-repo" placeholder="儲存庫名稱 (例如: my-workout-app)" class="w-full text-sm rounded border-slate-300 border p-2 focus:ring-indigo-500 outline-none">
+                        <input type="password" id="gh-token" placeholder="Personal Access Token (需勾選 repo 權限)" class="w-full text-sm rounded border-slate-300 border p-2 md:col-span-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <button onclick="saveGithubSettings()" class="bg-slate-800 text-white text-sm font-bold py-2 px-4 rounded hover:bg-slate-700 w-full md:w-auto">💾 儲存設定</button>
+                </div>
+            </div>
+
             <!-- 檔案同步工具列 -->
             <div class="flex flex-wrap gap-3 mb-4 justify-end">
                 <button onclick="triggerImport()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-lg shadow-sm border border-slate-300 transition-all text-sm flex items-center gap-2">
@@ -467,8 +484,12 @@
                 <!-- 隱藏的檔案輸入框 -->
                 <input type="file" id="import-file" accept=".json" class="hidden" onchange="importRecords(event)">
                 
+                <button onclick="syncToGithub()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-all text-sm flex items-center gap-2">
+                    ☁️ 同步上傳至 GitHub
+                </button>
+
                 <button onclick="exportRecords()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-all text-sm flex items-center gap-2">
-                    💾 儲存並下載 (records.json)
+                    💾 本機備份下載
                 </button>
             </div>
 
@@ -625,6 +646,94 @@
             }
         }
 
+        // --- GitHub API 自動同步邏輯 ---
+        function toggleGithubSettings() {
+            const el = document.getElementById('gh-settings');
+            const icon = document.getElementById('gh-toggle-icon');
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                icon.textContent = '▲';
+                // 讀取既有設定
+                document.getElementById('gh-owner').value = localStorage.getItem('ghOwner') || '';
+                document.getElementById('gh-repo').value = localStorage.getItem('ghRepo') || '';
+                document.getElementById('gh-token').value = localStorage.getItem('ghToken') || '';
+            } else {
+                el.classList.add('hidden');
+                icon.textContent = '▼';
+            }
+        }
+
+        function saveGithubSettings() {
+            localStorage.setItem('ghOwner', document.getElementById('gh-owner').value.trim());
+            localStorage.setItem('ghRepo', document.getElementById('gh-repo').value.trim());
+            localStorage.setItem('ghToken', document.getElementById('gh-token').value.trim());
+            alert("✅ GitHub 設定已儲存在瀏覽器中！");
+            toggleGithubSettings();
+        }
+
+        async function syncToGithub() {
+            const owner = localStorage.getItem('ghOwner');
+            const repo = localStorage.getItem('ghRepo');
+            const token = localStorage.getItem('ghToken');
+
+            if (!owner || !repo || !token) {
+                alert("請先展開「⚙️ GitHub 自動同步設定」並填寫資訊！");
+                return;
+            }
+
+            if (workoutRecords.length === 0) {
+                alert("目前沒有紀錄可以同步喔！");
+                return;
+            }
+
+            const path = 'records.json';
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+            
+            try {
+                // 處理中文 Base64 編碼的常見問題
+                const contentBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(workoutRecords, null, 2))));
+                
+                // 1. 取得舊檔案的 SHA (如果舊檔案存在)
+                let sha = '';
+                const getRes = await fetch(url, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+                
+                if (getRes.ok) {
+                    const data = await getRes.json();
+                    sha = data.sha;
+                }
+
+                // 2. 準備上傳的資料內容
+                const body = {
+                    message: `更新健身紀錄 (${new Date().toLocaleDateString()})`,
+                    content: contentBase64
+                };
+                if (sha) body.sha = sha; // 若是要覆蓋舊檔，GitHub API 規定必須附上原檔的 SHA
+
+                // 3. 執行 PUT 請求更新至 GitHub
+                const putRes = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (putRes.ok) {
+                    alert("✅ 成功！紀錄已自動推送到 GitHub！");
+                } else {
+                    const errData = await putRes.json();
+                    alert(`❌ 同步失敗：${errData.message}`);
+                }
+
+            } catch (error) {
+                alert("❌ 同步過程中發生錯誤，請檢查網路或 GitHub 權限設定。");
+                console.error(error);
+            }
+        }
+
         // --- 匯出與匯入 JSON 檔案邏輯 ---
         function exportRecords() {
             if (workoutRecords.length === 0) {
@@ -672,14 +781,38 @@
             event.target.value = ''; // 清空 input 讓下次可以選同一個檔案
         }
 
-        // 自動從 GitHub 同目錄嘗試讀取 records.json
+        // 自動從 GitHub 嘗試讀取 records.json
         async function fetchRecordsFromGithub() {
+            const owner = localStorage.getItem('ghOwner');
+            const repo = localStorage.getItem('ghRepo');
+            const token = localStorage.getItem('ghToken');
+
             try {
-                // 加入 cache: "no-store" 避免讀到舊的暫存檔
+                // 情境 1: 如果有設定 Token，直接透過 API 拿最新鮮的檔案 (不受 GitHub Pages 快取影響)
+                if (owner && repo && token) {
+                    const url = `https://api.github.com/repos/${owner}/${repo}/contents/records.json`;
+                    const response = await fetch(url, {
+                        headers: { 
+                            'Authorization': `token ${token}`,
+                            'Accept': 'application/vnd.github.v3.raw' // 要求直接回傳檔案內容
+                        }
+                    });
+                    if (response.ok) {
+                        const serverRecords = await response.json();
+                        if (workoutRecords.length === 0 && serverRecords.length > 0) {
+                            workoutRecords = serverRecords;
+                            localStorage.setItem('myWorkoutRecords', JSON.stringify(workoutRecords));
+                            renderRecords();
+                            console.log("已透過 API 載入最新紀錄！");
+                        }
+                        return; // 成功讀取就結束
+                    }
+                }
+
+                // 情境 2: 如果沒有 Token，或 API 失敗，嘗試從同目錄直接抓取 (GitHub Pages)
                 const response = await fetch('./records.json', { cache: "no-store" });
                 if (response.ok) {
                     const serverRecords = await response.json();
-                    // 如果讀取到遠端有檔案，且本地端目前完全沒資料，就自動載入
                     if (workoutRecords.length === 0 && serverRecords.length > 0) {
                         workoutRecords = serverRecords;
                         localStorage.setItem('myWorkoutRecords', JSON.stringify(workoutRecords));
@@ -688,7 +821,7 @@
                     }
                 }
             } catch (error) {
-                console.log("找不到 records.json 或目前在本地磁碟執行，繼續使用本地快取。");
+                console.log("找不到 records.json，將繼續使用本地快取。");
             }
         }
 
